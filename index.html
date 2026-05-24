@@ -404,10 +404,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
-      gap: 2rem;
+      display: block;
       padding: 0 4rem;
     }
 
@@ -1661,12 +1658,6 @@
       </div><!-- /about-left -->
 
       <!-- RIGHT: photo + vertical name -->
-      <div class="about-right reveal" style="transition-delay:0.25s">
-        <!-- Replace about-portrait.jpg with your actual photo -->
-        <div class="about-photo-placeholder">Add your photo here<br/><small>images/about-portrait.jpg</small></div>
-        <p class="about-vertical-name">AUZA'IE RUSYDI</p>
-      </div>
-
     </div><!-- /about-layout -->
   </section>
 
@@ -1680,7 +1671,7 @@
         <div class="exp-grid single">
 
           <div class="exp-card" onclick="openModal(8)">
-            <div class="exp-card-placeholder">images/exp/rosnah-event-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/rosnah-event-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">EVENT COORDINATOR / SALES ADMIN</div>
               <div class="exp-card-date">July – Nov 2025</div>
@@ -1696,7 +1687,7 @@
         <div class="exp-grid">
 
           <div class="exp-card" onclick="openModal(9)">
-            <div class="exp-card-placeholder">images/exp/jabatan-intern-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/jabatan-intern-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">INTERN</div>
               <div class="exp-card-date">May – July 2024</div>
@@ -1704,7 +1695,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(10)">
-            <div class="exp-card-placeholder">images/exp/jabatan-asst-aug.jpg</div>
+            <img class="exp-card-img" src="images/exp/jabatan-asst-aug.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">ASSISTANT COMMITTEE MEMBERS</div>
               <div class="exp-card-date">Aug 2024</div>
@@ -1712,7 +1703,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(11)">
-            <div class="exp-card-placeholder">images/exp/jabatan-joint-sec.jpg</div>
+            <img class="exp-card-img" src="images/exp/jabatan-joint-sec.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">JOINT SECRETARY</div>
               <div class="exp-card-date">December 2024</div>
@@ -1720,7 +1711,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(12)">
-            <div class="exp-card-placeholder">images/exp/jabatan-asst-dec.jpg</div>
+            <img class="exp-card-img" src="images/exp/jabatan-asst-dec.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">ASSISTANT COMMITTEE MEMBERS</div>
               <div class="exp-card-date">Sept &amp; Dec 2025</div>
@@ -1736,7 +1727,7 @@
         <div class="exp-grid">
 
           <div class="exp-card" onclick="openModal(0)">
-            <div class="exp-card-placeholder">images/exp/unissa-sec1-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-sec1-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">SECRETARY 1 OF RESIDENTIAL COLLEGE UNIT</div>
               <div class="exp-card-date">2022/2023</div>
@@ -1744,7 +1735,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(1)">
-            <div class="exp-card-placeholder">images/exp/unissa-head-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-head-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">HEAD OF SPIRITUAL &amp; RELIGIOUS UNIT (IDEMS)</div>
               <div class="exp-card-date">2022/2023</div>
@@ -1752,7 +1743,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(2)">
-            <div class="exp-card-placeholder">images/exp/unissa-treasurer-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-treasurer-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">TREASURER (IDEMS)</div>
               <div class="exp-card-date">2023/2024</div>
@@ -1760,7 +1751,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(3)">
-            <div class="exp-card-placeholder">images/exp/unissa-exco-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-exco-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">EXCO OF RESIDENTIAL COLLEGE UNIT</div>
               <div class="exp-card-date">2023/2024</div>
@@ -1768,7 +1759,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(4)">
-            <div class="exp-card-placeholder">images/exp/unissa-conference.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-conference.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">CONFERENCE COMMITTEE</div>
               <div class="exp-card-date">June 2023</div>
@@ -1776,7 +1767,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(5)">
-            <div class="exp-card-placeholder">images/exp/unissa-parallel.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-parallel.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">PARALLEL SESSION SUPERVISOR</div>
               <div class="exp-card-date">May 2024</div>
@@ -1784,7 +1775,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(6)">
-            <div class="exp-card-placeholder">images/exp/unissa-liaison-1.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-liaison-1.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">LIAISON OFFICER</div>
               <div class="exp-card-date">August 2024 &amp; June 2025</div>
@@ -1792,7 +1783,7 @@
           </div>
 
           <div class="exp-card" onclick="openModal(7)">
-            <div class="exp-card-placeholder">images/exp/unissa-asst-sec.jpg</div>
+            <img class="exp-card-img" src="images/exp/unissa-asst-sec.jpg" alt="" loading="lazy"/>
             <div class="exp-card-label">
               <div class="exp-card-role">ASSISTANT SECRETARY</div>
               <div class="exp-card-date">May 2025</div>
@@ -1848,23 +1839,23 @@
         <h2 class="work-heading reveal">GRAPHIC DESIGNS</h2>
         <div class="work-grid" id="grid-graphic">
           <!-- Row 1 — JBS Posters -->
-          <div class="work-item" onclick="openLightbox('graphic',0)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-01.jpg<br/><small>Kem Belia Remaja 2025</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',1)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-02.jpg<br/><small>Program Mencari Kampung Kitan</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',2)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-03.jpg<br/><small>Tradisi Mengait Rinda</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',3)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-04.jpg<br/><small>Basic Housekeeping &amp; Services Skills</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',4)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-05.jpg<br/><small>Kem Eksplorasi Hutan Tropika 2025</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',5)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-06.jpg<br/><small>Bengkel Pembuatan Kek Roll</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',6)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-07.jpg<br/><small>Kem Belia &amp; Sukan</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',7)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-08.jpg<br/><small>Pertandingan Koir Lagu Hari Keputeraan</small></div></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',0)"><div class="work-img-wrap"><img src="images/work/gd-01.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',1)"><div class="work-img-wrap"><img src="images/work/gd-02.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',2)"><div class="work-img-wrap"><img src="images/work/gd-03.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',3)"><div class="work-img-wrap"><img src="images/work/gd-04.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',4)"><div class="work-img-wrap"><img src="images/work/gd-05.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',5)"><div class="work-img-wrap"><img src="images/work/gd-06.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',6)"><div class="work-img-wrap"><img src="images/work/gd-07.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',7)"><div class="work-img-wrap"><img src="images/work/gd-08.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
           <!-- Row 2 — Product ads -->
-          <div class="work-item" onclick="openLightbox('graphic',8)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-09.jpg<br/><small>Swiss Fru Kunafa – Dark Choc</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',9)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-10.jpg<br/><small>Swiss Fru Kunafa – Speculoos</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',10)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-11.jpg<br/><small>Swiss Fru Kunafa – Almond</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',11)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-12.jpg<br/><small>Swiss Fru Kunafa – Pistachio</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',12)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-13.jpg<br/><small>Ahmad Tea – BlackCurrant</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',13)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-14.jpg<br/><small>Ahmad Tea – Vanilla Franc.</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',14)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-15.jpg<br/><small>Ahmad Tea – Raspberry</small></div></div></div>
-          <div class="work-item" onclick="openLightbox('graphic',15)"><div class="work-img-wrap"><div class="work-img-ph">images/work/gd-16.jpg<br/><small>Ahmad Tea – Strawberry</small></div></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',8)"><div class="work-img-wrap"><img src="images/work/gd-09.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',9)"><div class="work-img-wrap"><img src="images/work/gd-10.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',10)"><div class="work-img-wrap"><img src="images/work/gd-11.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',11)"><div class="work-img-wrap"><img src="images/work/gd-12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',12)"><div class="work-img-wrap"><img src="images/work/gd-13.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',13)"><div class="work-img-wrap"><img src="images/work/gd-14.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',14)"><div class="work-img-wrap"><img src="images/work/gd-15.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',15)"><div class="work-img-wrap"><img src="images/work/gd-16.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
         </div>
       </div>
 
@@ -1873,32 +1864,32 @@
         <h2 class="work-heading reveal">PHOTOGRAPHY</h2>
         <div class="work-grid" id="grid-photo">
           <!-- Graduation set -->
-          <div class="work-item" onclick="openLightbox('photo',0)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-01.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',1)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-02.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',2)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-03.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',3)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-04.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',4)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-05.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',5)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-06.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',6)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-07.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',7)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-08.jpg</div></div></div>
+          <div class="work-item" onclick="openLightbox('photo',0)"><div class="work-img-wrap"><img src="images/work/ph-01.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',1)"><div class="work-img-wrap"><img src="images/work/ph-02.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',2)"><div class="work-img-wrap"><img src="images/work/ph-03.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',3)"><div class="work-img-wrap"><img src="images/work/ph-04.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',4)"><div class="work-img-wrap"><img src="images/work/ph-05.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',5)"><div class="work-img-wrap"><img src="images/work/ph-06.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',6)"><div class="work-img-wrap"><img src="images/work/ph-07.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',7)"><div class="work-img-wrap"><img src="images/work/ph-08.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
           <!-- Landscape/nature set -->
-          <div class="work-item" onclick="openLightbox('photo',8)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-09.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',9)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-10.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',10)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-11.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',11)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-12.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',12)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-13.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',13)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-14.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',14)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-15.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',15)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-16.jpg</div></div></div>
+          <div class="work-item" onclick="openLightbox('photo',8)"><div class="work-img-wrap"><img src="images/work/ph-09.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',9)"><div class="work-img-wrap"><img src="images/work/ph-10.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',10)"><div class="work-img-wrap"><img src="images/work/ph-11.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',11)"><div class="work-img-wrap"><img src="images/work/ph-12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',12)"><div class="work-img-wrap"><img src="images/work/ph-13.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',13)"><div class="work-img-wrap"><img src="images/work/ph-14.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',14)"><div class="work-img-wrap"><img src="images/work/ph-15.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',15)"><div class="work-img-wrap"><img src="images/work/ph-16.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
           <!-- Event/documentary set -->
-          <div class="work-item" onclick="openLightbox('photo',16)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-17.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',17)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-18.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',18)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-19.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',19)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-20.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',20)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-21.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',21)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-22.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',22)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-23.jpg</div></div></div>
-          <div class="work-item" onclick="openLightbox('photo',23)"><div class="work-img-wrap"><div class="work-img-ph">images/work/ph-24.jpg</div></div></div>
+          <div class="work-item" onclick="openLightbox('photo',16)"><div class="work-img-wrap"><img src="images/work/ph-17.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',17)"><div class="work-img-wrap"><img src="images/work/ph-18.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',18)"><div class="work-img-wrap"><img src="images/work/ph-19.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',19)"><div class="work-img-wrap"><img src="images/work/ph-20.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',20)"><div class="work-img-wrap"><img src="images/work/ph-21.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',21)"><div class="work-img-wrap"><img src="images/work/ph-22.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',22)"><div class="work-img-wrap"><img src="images/work/ph-23.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',23)"><div class="work-img-wrap"><img src="images/work/ph-24.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
         </div>
       </div>
 
