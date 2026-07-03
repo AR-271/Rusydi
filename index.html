@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auza'ie Rusydi – Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Variables ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:        #2d7268;
+      --teal-dark:   #1e5049;
+      --teal-light:  #3d8f82;
+      --teal-pill:   rgba(45, 114, 104, 0.85);
+      --white:       #ffffff;
+      --overlay:     rgba(10, 30, 28, 0.52);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: #0a1e1c;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── Navbar ──────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: var(--teal-dark);
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(18, 45, 40, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-logo span {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      margin-left: 2px;
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.4); opacity: 0.7; }
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--teal-pill);
+    }
+
+    /* ── Hamburger (mobile) ──────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2.5px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(18, 45, 40, 0.97);
+      backdrop-filter: blur(14px);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 99;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.08); }
+
+    /* ── Hero Section ────────────────────────────────── */
+    #home {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Background image — replace hero-bg.jpg with your actual photo */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('images/hero-bg.jpg') center center / cover no-repeat;
+      z-index: 0;
+      transform: scale(1.04);
+      animation: subtle-zoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes subtle-zoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.10); }
+    }
+
+    /* Gradient overlay + seamless bottom fade into About */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,
+          rgba(10, 30, 28, 0.72) 0%,
+          rgba(10, 30, 28, 0.45) 60%,
+          rgba(10, 30, 28, 0.15) 100%),
+        linear-gradient(to bottom,
+          rgba(10, 30, 28, 0.3) 0%,
+          rgba(10, 30, 28, 0.05) 45%,
+          rgba(8, 24, 22, 0.75) 80%,
+          rgba(8, 24, 22, 1) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 5rem;
+      padding-top: 64px;
+      max-width: 800px;
+    }
+
+    /* Staggered entrance animations */
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      border: 1.5px solid var(--teal-light);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.7s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      text-shadow: 0 4px 32px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fade-up 0.75s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fade-up 0.75s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-weight: 600;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fade-up 0.75s ease forwards;
+      animation-delay: 0.85s;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.7s ease forwards;
+      animation-delay: 1.05s;
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-light);
+      border-color: var(--teal-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(45,114,104,0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(45,114,104,0.55);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.35);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(45,114,104,0.75);
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fade-in 1s ease forwards;
+      animation-delay: 1.8s;
+    }
+
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .scroll-arrow {
+      width: 22px; height: 22px;
+      border-right: 2.5px solid rgba(255,255,255,0.45);
+      border-bottom: 2.5px solid rgba(255,255,255,0.45);
+      transform: rotate(45deg);
+      animation: bounce-arrow 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce-arrow {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ── Keyframes ───────────────────────────────────── */
+    @keyframes fade-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+
+    /* ── Placeholder sections (for future slides) ────── */
+    .placeholder-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.15);
+      background: #0a1e1c;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* ── ABOUT SECTION ───────────────────────────────── */
+    #about {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      overflow: hidden;
+      padding: 100px 0 80px;
+    }
+
+    .about-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/about-bg.jpg') center center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .about-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,
+          rgba(8, 24, 22, 0.88) 0%,
+          rgba(8, 24, 22, 0.72) 55%,
+          rgba(8, 24, 22, 0.35) 100%),
+        linear-gradient(to bottom,
+          rgba(8, 24, 22, 1) 0%,
+          rgba(8, 24, 22, 0.0) 12%,
+          rgba(8, 24, 22, 0.0) 80%,
+          rgba(13, 40, 32, 1) 100%);
+      z-index: 1;
+    }
+
+    .about-layout {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: block;
+      padding: 0 4rem;
+    }
+
+    /* ── Left: content ── */
+    .about-left { max-width: 820px; }
+
+    /* Scroll reveal base state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-roles {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0;
+      margin-bottom: 1.4rem;
+    }
+
+    .about-roles span {
+      font-weight: 700;
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .about-roles .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      display: inline-block;
+      margin: 0 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .about-bio {
+      font-size: clamp(0.85rem, 1.3vw, 0.98rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 2rem;
+      max-width: 750px;
+    }
+
+    /* Section labels (SKILLS, LANGUAGES, EDUCATION) */
+    .about-label {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Tag pills */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .tag {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.38rem 1rem;
+      border-radius: 6px;
+      background: rgba(45, 114, 104, 0.45);
+      border: 1.5px solid rgba(61, 143, 130, 0.5);
+      color: var(--white);
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .tag:hover {
+      background: rgba(45, 114, 104, 0.7);
+      transform: translateY(-2px);
+    }
+
+    /* Education cards */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 1.1rem 1.3rem;
+      backdrop-filter: blur(8px);
+      transition: background 0.25s, transform 0.25s, border-color 0.25s;
+    }
+
+    .edu-card:hover {
+      background: rgba(45, 114, 104, 0.25);
+      border-color: rgba(61,143,130,0.45);
+      transform: translateY(-3px);
+    }
+
+    .edu-year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--teal-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .edu-school {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .edu-details {
+      list-style: disc;
+      padding-left: 1.1rem;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    /* ── Right: photo + vertical name ── */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 0.5rem;
+      min-width: 160px;
+    }
+
+    .about-photo {
+      width: 220px;
+      height: 320px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 14px;
+      border: 2.5px solid rgba(61,143,130,0.45);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      display: block;
+    }
+
+    /* Fallback if no photo */
+    .about-photo-placeholder {
+      width: 220px;
+      height: 320px;
+      border-radius: 14px;
+      background: rgba(45,114,104,0.2);
+      border: 2px dashed rgba(61,143,130,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .about-vertical-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.12);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* ── About responsive ── */
+    @media (max-width: 900px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+        padding: 0 1.8rem;
+      }
+      .about-right {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        order: -1;
+        padding-bottom: 1rem;
+      }
+      .about-vertical-name {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 2rem;
+        color: rgba(255,255,255,0.18);
+      }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      #about { padding: 90px 0 60px; }
+      .about-photo, .about-photo-placeholder { width: 160px; height: 230px; }
+    }
+
+    /* ── EXPERIENCE SECTION ──────────────────────────── */
+    #experience {
+      position: relative;
+      background: #0d2820;
+      padding: 100px 0 80px;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Geometric background photo */
+    #experience::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/exp-bg.jpg') center center / cover no-repeat;
+      opacity: 0.18;
+      z-index: 0;
+    }
+
+    /* Radial glow + top/bottom seamless fades */
+    #experience::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(13,40,32,1) 0%,
+          rgba(13,40,32,0) 8%,
+          rgba(13,40,32,0) 88%,
+          rgba(13,40,32,1) 100%),
+        radial-gradient(ellipse at 50% 40%, rgba(45,114,104,0.15) 0%, transparent 65%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .exp-inner {
+      position: relative;
+      z-index: 1;
+      padding: 0 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section heading for experience */
+    .exp-section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      letter-spacing: 0.08em;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-section-sub {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 4rem;
+    }
+
+    /* Organization block */
+    .exp-org { margin-bottom: 5rem; }
+
+    .exp-org-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(61,143,130,0.25);
+    }
+
+    /* ── Cinematic row list ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 280px;
+      cursor: pointer;
+      position: relative;
+      border-bottom: 1px solid rgba(61,143,130,0.12);
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+
+    .exp-row:first-child { border-top: 1px solid rgba(61,143,130,0.12); }
+
+    .exp-row:hover { background: rgba(45,114,104,0.06); }
+
+    /* Alternate image side every other row */
+    .exp-row.flip .exp-row-img { order: 2; }
+    .exp-row.flip .exp-row-info { order: 1; }
+
+    /* Image panel */
+    .exp-row-img {
+      position: relative;
+      overflow: hidden;
+      background: #0a1e1c;
+    }
+
+    .exp-row-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .exp-row:hover .exp-row-img img { transform: scale(1.06); }
+
+    /* Teal reveal line on hover */
+    .exp-row-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(45,114,104,0.18), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .exp-row.flip .exp-row-img::after {
+      background: linear-gradient(to left, rgba(45,114,104,0.18), transparent);
+    }
+    .exp-row:hover .exp-row-img::after { opacity: 1; }
+
+    /* Info panel */
+    .exp-row-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.4rem 3rem;
+      gap: 0.8rem;
+      position: relative;
+    }
+
+    .exp-row-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1;
+      color: rgba(61,143,130,0.12);
+      position: absolute;
+      top: 1.2rem;
+      right: 1.8rem;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    .exp-row-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+    }
+
+    .exp-row-role {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+      letter-spacing: 0.06em;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .exp-row-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .exp-row-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(45,114,104,0.3);
+      border: 1px solid rgba(61,143,130,0.4);
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+    }
+
+    /* Arrow hint */
+    .exp-row-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.8rem;
+      transition: color 0.25s, gap 0.25s;
+    }
+
+    .exp-row:hover .exp-row-arrow {
+      color: var(--teal-light);
+      gap: 0.7rem;
+    }
+
+    /* Mobile stacked */
+    @media (max-width: 768px) {
+      .exp-inner { padding: 0 1.2rem; }
+      .exp-row {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .exp-row-img { height: 200px; order: 0 !important; }
+      .exp-row-info { order: 1 !important; padding: 1.4rem 1.2rem; }
+      .exp-row-num { font-size: 2.5rem; top: 0.8rem; right: 0.8rem; }
+      .exp-row.flip .exp-row-img { order: 0 !important; }
+      .exp-row.flip .exp-row-info { order: 1 !important; }
+    }
+
+    /* ── MODAL ──────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,18,16,0.88);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
+
+    .modal-box {
+      background: #fff;
+      color: #111;
+      border-radius: 18px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Carousel */
+    .modal-carousel {
+      position: relative;
+      width: 100%;
+      background: #0a0a0a;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 65vh;
+      min-height: 180px;
+      overflow: hidden;
+    }
+
+    .carousel-slide img {
+      /* Respect original proportions — contain within max bounds */
+      max-width: 100%;
+      max-height: 65vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .carousel-slide-placeholder {
+      width: 100%;
+      min-height: 220px;
+      background: linear-gradient(135deg, #1e5049, #0d2820);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Arrow buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.55);
+      border: none;
+      color: #fff;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .carousel-btn:hover { background: rgba(45,114,104,0.85); }
+    .carousel-btn.prev { left: 0.7rem; }
+    .carousel-btn.next { right: 0.7rem; }
+    .carousel-btn.hidden { display: none; }
+
+    /* Counter badge */
+    .carousel-counter {
+      position: absolute;
+      bottom: 0.6rem; right: 0.8rem;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* Dot indicators */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.7rem 0 0;
+    }
+    .dot-indicator {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dot-indicator.active { background: var(--teal); transform: scale(1.25); }
+
+    /* Modal body */
+    .modal-body {
+      padding: 1.4rem 1.6rem 1rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .modal-highlights-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-highlights {
+      list-style: disc;
+      padding-left: 1.2rem;
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    /* Modal footer (teal bar) */
+    .modal-footer {
+      background: var(--teal-dark);
+      padding: 1rem 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .modal-footer-role {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+
+    .modal-footer-dates li {
+      list-style: disc;
+      margin-left: 1.2rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: 0.7rem; right: 0.7rem;
+      background: rgba(0,0,0,0.55);
+      border: none;
+      color: #fff;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(220,50,50,0.8); }
+
+    /* ── WORK SECTION ────────────────────────────────── */
+    #work {
+      position: relative;
+      background: #091a17;
+      padding: 100px 0 80px;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .work-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/work-bg.jpg') center center / cover no-repeat;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(13,40,32,1) 0%,
+        rgba(9,26,23,0.55) 10%,
+        rgba(9,26,23,0.7) 85%,
+        rgba(8,22,20,1) 100%);
+      z-index: 0;
+    }
+
+    .work-inner {
+      position: relative;
+      z-index: 1;
+      padding: 0 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── Tab Nav ── */
+    .work-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .work-tab {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      padding: 0.6rem 2rem;
+      border-radius: 999px;
+      border: 2px solid rgba(61,143,130,0.4);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .work-tab:hover {
+      border-color: rgba(61,143,130,0.8);
+      color: #fff;
+    }
+
+    .work-tab.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+    }
+
+    /* ── Panel ── */
+    .work-panel { }
+    .work-panel.hidden { display: none; }
+
+    .work-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.1em;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+
+    .work-video-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: -1.2rem;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Grid ── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .work-item {
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #0d2820;
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: 1.5px solid rgba(61,143,130,0.15);
+    }
+
+    .work-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+      border-color: rgba(61,143,130,0.5);
+      z-index: 2;
+    }
+
+    .work-img-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .work-item:hover .work-img-wrap img {
+      transform: scale(1.08);
+    }
+
+    /* Placeholder before images are added */
+    .work-img-ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(45,114,104,0.25), rgba(13,40,32,0.9));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.65rem;
+      text-align: center;
+      padding: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* Zoom overlay on hover */
+    .work-item::after {
+      content: '🔍';
+      position: absolute;
+      inset: 0;
+      background: rgba(45,114,104,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .work-item:hover::after { opacity: 1; }
+
+    /* Video specific */
+    .video-item::after { content: '▶'; font-size: 2rem; }
+
+    .video-ph {
+      background: linear-gradient(135deg, rgba(20,60,55,0.8), rgba(9,26,23,0.95)) !important;
+    }
+
+    .play-icon {
+      font-size: 2rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.4rem;
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(45,114,104,0.85);
+      color: #fff;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      pointer-events: none;
+      padding-left: 4px;
+    }
+
+    .work-item:hover .video-play-btn {
+      background: var(--teal);
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lb-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.94);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      padding: 2rem;
+    }
+
+    .lb-backdrop.open { opacity: 1; visibility: visible; }
+
+    .lb-img-wrap {
+      max-width: 90vw;
+      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .lb-backdrop.open .lb-img { transform: scale(1); }
+
+    .lb-close {
+      position: fixed;
+      top: 1.2rem; right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 301;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lb-close:hover { background: rgba(220,50,50,0.8); }
+
+    .lb-arrow {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 301;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lb-arrow:hover { background: rgba(45,114,104,0.7); }
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+    .lb-arrow.hidden { display: none; }
+
+    .lb-counter {
+      position: fixed;
+      bottom: 1.2rem;
+      left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      z-index: 301;
+    }
+
+    /* ── VIDEO MODAL ── */
+    .vid-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      padding: 2rem;
+    }
+
+    .vid-backdrop.open { opacity: 1; visibility: visible; }
+
+    .vid-box {
+      width: 100%;
+      max-width: 860px;
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .vid-backdrop.open .vid-box { transform: scale(1); }
+
+    .vid-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .vid-player-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+
+    .vid-player-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* No-URL placeholder inside video modal */
+    .vid-no-url {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.9rem;
+      gap: 0.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* ── CONTACT SECTION ─────────────────────────────── */
+    #contact {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/contact-bg.jpg') center top / cover no-repeat;
+      z-index: 0;
+    }
+
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,
+          rgba(8,22,20,0.45) 0%,
+          rgba(8,22,20,0.65) 45%,
+          rgba(8,22,20,0.85) 100%),
+        linear-gradient(to bottom,
+          rgba(8,22,20,1) 0%,
+          rgba(8,22,20,0.0) 12%,
+          rgba(8,22,20,0.3) 100%);
+      z-index: 1;
+    }
+
+    .contact-layout {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: calc(100vh - 60px);
+      padding: 100px 6rem 60px;
+    }
+
+    /* Portrait */
+    .contact-photo-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      max-height: 75vh;
+    }
+
+    .contact-photo-wrap img,
+    .contact-photo-ph {
+      max-height: 70vh;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+      display: block;
+      filter: drop-shadow(0 12px 40px rgba(0,0,0,0.5));
+    }
+
+    .contact-photo-ph {
+      height: 500px;
+      width: 320px;
+      background: rgba(45,114,104,0.12);
+      border: 2px dashed rgba(61,143,130,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Info side */
+    .contact-info { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .contact-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    /* Each contact row */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      margin-bottom: 0.6rem;
+    }
+
+    a.contact-item:hover {
+      background: rgba(45,114,104,0.35);
+      border-color: rgba(61,143,130,0.5);
+      transform: translateX(6px);
+    }
+
+    .contact-icon {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: rgba(45,114,104,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .contact-icon svg { width: 22px; height: 22px; }
+
+    .contact-icon-linkedin {
+      background: #0a66c2;
+    }
+
+    .contact-item span {
+      font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* Footer strip */
+    .contact-footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 1rem 2rem 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Contact responsive */
+    @media (max-width: 860px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        padding: 100px 2rem 3rem;
+        text-align: center;
+      }
+      .contact-photo-wrap {
+        max-height: 40vh;
+        order: -1;
+      }
+      .contact-photo-wrap img,
+      .contact-photo-ph {
+        max-height: 38vh;
+        height: auto;
+        width: 220px;
+      }
+      a.contact-item:hover { transform: none; }
+      .contact-item { justify-content: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .contact-layout { padding: 90px 1rem 2rem; }
+      .contact-item span { font-size: 0.9rem; }
+    }
+      .work-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .work-inner { padding: 0 1rem; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .lb-arrow { width: 36px; height: 36px; font-size: 1rem; }
+      .lb-prev { left: 0.3rem; }
+      .lb-next { right: 0.3rem; }
+    }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content {
+        padding: 0 1.8rem;
+        padding-top: 80px;
+        text-align: center;
+        max-width: 100%;
+      }
+
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-buttons { justify-content: center; }
+
+      /* Experience mobile - handled in exp section media query above */
+      .modal-box { max-height: 95vh; border-radius: 14px; }
+    }
+
+    /* MOBILE BACKGROUND OVERRIDES - max-width 768px
+       Desktop backgrounds are untouched.
+       Each section swaps to its portrait-optimised mobile image.
+    */
+    @media (max-width: 768px) {
+
+      /* Hero - hero-bg-mobile.jpg */
+      .hero-bg {
+        background-image: url('images/hero-bg-mobile.jpg');
+        background-position: center top;
+      }
+
+      /* About - about-bg-mobile.jpg */
+      .about-bg {
+        background-image: url('images/about-bg-mobile.jpg');
+        background-position: center top;
+      }
+
+      /* Experience - exp-bg-mobile.jpg */
+      #experience::before {
+        background-image: url('images/exp-bg-mobile.jpg');
+        background-position: center center;
+        opacity: 0.28;
+      }
+
+      /* Work - work-bg-mobile.jpg */
+      .work-bg {
+        background-image: url('images/work-bg-mobile.jpg');
+        background-position: center top;
+      }
+
+      /* Contact - contact-bg-mobile.jpg */
+      .contact-bg {
+        background-image: url('images/contact-bg-mobile.jpg');
+        background-position: center top;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ──────────────────────────────────────── -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">PORTFOLIO <span></span></a>
+
+    <ul class="nav-links">
+      <li><a href="#home"       class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home"       onclick="closeMobile()">Home</a>
+    <a href="#about"      onclick="closeMobile()">About</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#work"       onclick="closeMobile()">Work</a>
+    <a href="#contact"    onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ── HERO SECTION ────────────────────────────────── -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Welcome to my creative space</div>
+      <h1 class="hero-name">AUZA'IE RUSYDI'S</h1>
+      <h2 class="hero-title">PORTFOLIO</h2>
+      <p class="hero-desc">
+        Assalamualaikum & Hello! Welcome to my creative space! Every project here is a chapter of my story.
+        Take your time, venture through my past experiences, and see what I've been pouring my heart into.
+      </p>
+      <div class="hero-buttons">
+        <a href="#work"       class="btn btn-primary">See My Work</a>
+        <a href="#experience" class="btn btn-secondary">My Experience</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT SECTION ─────────────────────────────────── -->
+  <section id="about">
+    <div class="about-bg"></div>
+    <div class="about-overlay"></div>
+
+    <div class="about-layout">
+
+      <!-- LEFT: all text content -->
+      <div class="about-left">
+
+        <h2 class="about-heading reveal">ABOUT ME</h2>
+
+        <div class="about-roles reveal" style="transition-delay:0.1s">
+          <span>Photographer</span>
+          <span class="dot"></span>
+          <span>Videographer</span>
+          <span class="dot"></span>
+          <span>Graphic Designer</span>
+          <span class="dot"></span>
+          <span>Event Management</span>
+        </div>
+
+        <p class="about-bio reveal" style="transition-delay:0.2s">
+          A dedicated and organised individual with experience in leadership, event coordination,
+          and team management. Known for being a fast learner with a strong work ethic, technical
+          skills, and the ability to adapt to new challenges. Enjoys contributing to meaningful
+          projects, collaborating with others, and continuously improving through hands-on experience.
+          Committed to performing tasks with care and delivering results that make a positive impact.
+        </p>
+
+        <!-- SKILLS -->
+        <div class="reveal" style="transition-delay:0.3s">
+          <p class="about-label">SKILLS</p>
+          <div class="tags">
+            <span class="tag">Photography &amp; Videography</span>
+            <span class="tag">Graphic Design</span>
+            <span class="tag">Event Management</span>
+            <span class="tag">Leadership In Islamic Recitation</span>
+            <span class="tag">Professional Writing</span>
+          </div>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="reveal" style="transition-delay:0.4s">
+          <p class="about-label">LANGUAGES</p>
+          <div class="tags">
+            <span class="tag">English</span>
+            <span class="tag">Malay</span>
+            <span class="tag">Arabic</span>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="reveal" style="transition-delay:0.5s">
+          <p class="about-label">EDUCATION</p>
+          <div class="edu-grid">
+            <div class="edu-card">
+              <p class="edu-year">2021 – Present</p>
+              <p class="edu-school">Sultan Sharif Ali Islamic University (UNISSA)</p>
+              <ul class="edu-details">
+                <li>Bachelor In Islamic History &amp; Civilization &bull; Minor in ICT</li>
+                <li>Master in Islamic Manuscript</li>
+              </ul>
+            </div>
+            <div class="edu-card">
+              <p class="edu-year">2019 – 2021</p>
+              <p class="edu-school">Sekolah Menengah Arab Laki-Laki Hassanal Bolkiah (SMALHB)</p>
+              <ul class="edu-details">
+                <li>Jayyid &bull; 1 O' Level</li>
+              </ul>
+            </div>
+            <div class="edu-card">
+              <p class="edu-year">2016 – 2018</p>
+              <p class="edu-school">Mahad Islam Brunei (MIB)</p>
+              <ul class="edu-details">
+                <li>Jayyid Jiddan &bull; 2 O' Level</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /about-left -->
+
+      <!-- RIGHT: photo + vertical name -->
+    </div><!-- /about-layout -->
+  </section>
+
+  <!-- ── EXPERIENCE SECTION ────────────────────────────── -->
+  <section id="experience">
+    <div class="exp-inner">
+
+      <h2 class="exp-section-heading reveal">EXPERIENCE</h2>
+      <p class="exp-section-sub reveal" style="transition-delay:0.1s">Click any role to view details</p>
+
+      <!-- ORG 1: Rosnah Yusof -->
+      <div class="exp-org reveal" style="transition-delay:0.15s">
+        <p class="exp-org-title">ROSNAH YUSOF &amp; SONS ENTERTAINMENT / SDN BHD</p>
+        <div class="exp-list">
+
+          <div class="exp-row" onclick="openModal(8)">
+            <div class="exp-row-img">
+              <img src="images/exp/rosnah-event-1.jpg" alt="Event Coordinator" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">01</span>
+              <div class="exp-row-date">July – Nov 2025</div>
+              <div class="exp-row-role">Event Coordinator / Sales Admin</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Panaga Festival 2025</span>
+                <span class="exp-row-tag">UBD Ruby Run 2025</span>
+                <span class="exp-row-tag">UN Tourism Workshop</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ORG 2: Jabatan Belia -->
+      <div class="exp-org reveal" style="transition-delay:0.2s">
+        <p class="exp-org-title">JABATAN BELIA DAN SUKAN CAWANGAN DAERAH BELAIT</p>
+        <div class="exp-list">
+
+          <div class="exp-row" onclick="openModal(9)">
+            <div class="exp-row-img">
+              <img src="images/exp/jabatan-intern-1.jpg" alt="Intern" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">02</span>
+              <div class="exp-row-date">May – July 2024</div>
+              <div class="exp-row-role">Intern</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Basic Housekeeping &amp; Services Skills</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(10)">
+            <div class="exp-row-img">
+              <img src="images/exp/jabatan-asst-aug.jpg" alt="Assistant Committee" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">03</span>
+              <div class="exp-row-date">Aug 2024</div>
+              <div class="exp-row-role">Assistant Committee Members</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Kem Belia dan Sukan</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row" onclick="openModal(11)">
+            <div class="exp-row-img">
+              <img src="images/exp/jabatan-joint-sec.jpg" alt="Joint Secretary" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">04</span>
+              <div class="exp-row-date">December 2024</div>
+              <div class="exp-row-role">Joint Secretary</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Kem Belia Jati Diri</span>
+                <span class="exp-row-tag">FPPI x JBS KB Liaison</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(12)">
+            <div class="exp-row-img">
+              <img src="images/exp/jabatan-asst-dec.jpg" alt="Assistant Committee" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">05</span>
+              <div class="exp-row-date">Sept &amp; Dec 2025</div>
+              <div class="exp-row-role">Assistant Committee Members</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Kem Mandiri Dinamik FPPI x JBS KB</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ORG 3: UNISSA -->
+      <div class="exp-org reveal" style="transition-delay:0.25s">
+        <p class="exp-org-title">SULTAN SHARIF ALI ISLAMIC UNIVERSITY (UNISSA)</p>
+        <div class="exp-list">
+
+          <div class="exp-row" onclick="openModal(0)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-sec1-1.jpg" alt="Secretary 1" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">06</span>
+              <div class="exp-row-date">2022 / 2023</div>
+              <div class="exp-row-role">Secretary 1 of Residential College Unit</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Interlocal Bonding</span>
+                <span class="exp-row-tag">Hostelites Walk</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(1)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-head-1.jpg" alt="Head of Spiritual Unit" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">07</span>
+              <div class="exp-row-date">2022 / 2023</div>
+              <div class="exp-row-role">Head of Spiritual &amp; Religious Unit (IDEMS)</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Ihya Ramadhan</span>
+                <span class="exp-row-tag">Khatam Al-Quran FPPI</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row" onclick="openModal(2)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-treasurer-1.jpg" alt="Treasurer" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">08</span>
+              <div class="exp-row-date">2023 / 2024</div>
+              <div class="exp-row-role">Treasurer (IDEMS)</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">K2P2I 5.0</span>
+                <span class="exp-row-tag">Mahabbah Rasulillah</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(3)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-exco-1.jpg" alt="Exco" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">09</span>
+              <div class="exp-row-date">2023 / 2024</div>
+              <div class="exp-row-role">Exco of Residential College Unit</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Ittihad Day</span>
+                <span class="exp-row-tag">BIMA Exchange Programme</span>
+                <span class="exp-row-tag">Sinar Ramadhan</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row" onclick="openModal(4)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-conference.jpg" alt="Conference Committee" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">10</span>
+              <div class="exp-row-date">June 2023</div>
+              <div class="exp-row-role">Conference Committee</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">13th AIUA Conference</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(5)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-parallel.jpg" alt="Parallel Session Supervisor" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">11</span>
+              <div class="exp-row-date">May 2024</div>
+              <div class="exp-row-role">Parallel Session Supervisor</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">KAIB XV</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row" onclick="openModal(6)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-liaison-1.jpg" alt="Liaison Officer" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">12</span>
+              <div class="exp-row-date">August 2024 &amp; June 2025</div>
+              <div class="exp-row-role">Liaison Officer</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">UniRazak Delegation 2024</span>
+                <span class="exp-row-tag">Mufti Pahang 2025</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+          <div class="exp-row flip" onclick="openModal(7)">
+            <div class="exp-row-img">
+              <img src="images/exp/unissa-asst-sec.jpg" alt="Assistant Secretary" loading="lazy"/>
+            </div>
+            <div class="exp-row-info">
+              <span class="exp-row-num">13</span>
+              <div class="exp-row-date">May 2025</div>
+              <div class="exp-row-role">Assistant Secretary</div>
+              <div class="exp-row-highlights">
+                <span class="exp-row-tag">Kem Mandiri FPPI x JBS KB</span>
+              </div>
+              <div class="exp-row-arrow">View Details &rarr;</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /exp-inner -->
+  </section>
+
+  <!-- ── EXPERIENCE MODAL ───────────────────────────────── -->
+  <div class="modal-backdrop" id="expModal" onclick="handleBackdropClick(event)">
+    <div class="modal-box" id="modalBox">
+      <!-- Carousel -->
+      <div class="modal-carousel">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <button class="carousel-btn prev" id="carouselPrev" onclick="carouselMove(-1)">&#8592;</button>
+        <button class="carousel-btn next" id="carouselNext" onclick="carouselMove(1)">&#8594;</button>
+        <div class="carousel-counter" id="carouselCounter"></div>
+        <button class="modal-close" onclick="closeModal()">&#10005;</button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+
+      <!-- Body -->
+      <div class="modal-body" id="modalBody"></div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <div class="modal-footer-role" id="modalFooterRole"></div>
+        <ul class="modal-footer-dates" id="modalFooterDates"></ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── WORK SECTION ──────────────────────────────────── -->
+  <section id="work">
+    <div class="work-bg"></div>
+    <div class="work-overlay"></div>
+    <div class="work-inner">
+
+      <!-- Tab Navigation -->
+      <div class="work-tabs reveal">
+        <button class="work-tab active" onclick="switchTab('graphic')">Graphic Design</button>
+        <button class="work-tab" onclick="switchTab('photo')">Photography</button>
+        <button class="work-tab" onclick="switchTab('video')">Videography</button>
+      </div>
+
+      <!-- ── GRAPHIC DESIGN ── -->
+      <div class="work-panel" id="panel-graphic">
+        <h2 class="work-heading reveal">GRAPHIC DESIGNS</h2>
+        <div class="work-grid" id="grid-graphic">
+          <!-- Row 1 — JBS Posters -->
+          <div class="work-item" onclick="openLightbox('graphic',0)"><div class="work-img-wrap"><img src="images/work/gd-01.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',1)"><div class="work-img-wrap"><img src="images/work/gd-02.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',2)"><div class="work-img-wrap"><img src="images/work/gd-03.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',3)"><div class="work-img-wrap"><img src="images/work/gd-04.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',4)"><div class="work-img-wrap"><img src="images/work/gd-05.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',5)"><div class="work-img-wrap"><img src="images/work/gd-06.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',6)"><div class="work-img-wrap"><img src="images/work/gd-07.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',7)"><div class="work-img-wrap"><img src="images/work/gd-08.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <!-- Row 2 — Product ads -->
+          <div class="work-item" onclick="openLightbox('graphic',8)"><div class="work-img-wrap"><img src="images/work/gd-09.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',9)"><div class="work-img-wrap"><img src="images/work/gd-10.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',10)"><div class="work-img-wrap"><img src="images/work/gd-11.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',11)"><div class="work-img-wrap"><img src="images/work/gd-12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',12)"><div class="work-img-wrap"><img src="images/work/gd-13.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',13)"><div class="work-img-wrap"><img src="images/work/gd-14.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',14)"><div class="work-img-wrap"><img src="images/work/gd-15.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('graphic',15)"><div class="work-img-wrap"><img src="images/work/gd-16.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+        </div>
+      </div>
+
+      <!-- ── PHOTOGRAPHY ── -->
+      <div class="work-panel hidden" id="panel-photo">
+        <h2 class="work-heading reveal">PHOTOGRAPHY</h2>
+        <div class="work-grid" id="grid-photo">
+          <!-- Graduation set -->
+          <div class="work-item" onclick="openLightbox('photo',0)"><div class="work-img-wrap"><img src="images/work/ph-01.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',1)"><div class="work-img-wrap"><img src="images/work/ph-02.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',2)"><div class="work-img-wrap"><img src="images/work/ph-03.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',3)"><div class="work-img-wrap"><img src="images/work/ph-04.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',4)"><div class="work-img-wrap"><img src="images/work/ph-05.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',5)"><div class="work-img-wrap"><img src="images/work/ph-06.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',6)"><div class="work-img-wrap"><img src="images/work/ph-07.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',7)"><div class="work-img-wrap"><img src="images/work/ph-08.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <!-- Landscape/nature set -->
+          <div class="work-item" onclick="openLightbox('photo',8)"><div class="work-img-wrap"><img src="images/work/ph-09.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',9)"><div class="work-img-wrap"><img src="images/work/ph-10.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',10)"><div class="work-img-wrap"><img src="images/work/ph-11.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',11)"><div class="work-img-wrap"><img src="images/work/ph-12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',12)"><div class="work-img-wrap"><img src="images/work/ph-13.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',13)"><div class="work-img-wrap"><img src="images/work/ph-14.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',14)"><div class="work-img-wrap"><img src="images/work/ph-15.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',15)"><div class="work-img-wrap"><img src="images/work/ph-16.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <!-- Event/documentary set -->
+          <div class="work-item" onclick="openLightbox('photo',16)"><div class="work-img-wrap"><img src="images/work/ph-17.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',17)"><div class="work-img-wrap"><img src="images/work/ph-18.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',18)"><div class="work-img-wrap"><img src="images/work/ph-19.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',19)"><div class="work-img-wrap"><img src="images/work/ph-20.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',20)"><div class="work-img-wrap"><img src="images/work/ph-21.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',21)"><div class="work-img-wrap"><img src="images/work/ph-22.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',22)"><div class="work-img-wrap"><img src="images/work/ph-23.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+          <div class="work-item" onclick="openLightbox('photo',23)"><div class="work-img-wrap"><img src="images/work/ph-24.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/></div></div>
+        </div>
+      </div>
+
+      <!-- ── VIDEOGRAPHY ── -->
+      <div class="work-panel hidden" id="panel-video">
+        <h2 class="work-heading reveal">VIDEOGRAPHY</h2>
+        <p class="work-video-hint reveal">Click any thumbnail to watch</p>
+        <div class="work-grid" id="grid-video">
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1sWBlGtwibtVspOW3MmgZnumzuj0L-sjs/preview','Basic Housekeeping &amp; Services Skills')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-1.jpg" alt="Basic Housekeeping & Services Skills" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1HB6_Q24dEU9clYhol5uEX3ChVzmQmhw_/preview','Seni Kaligrafi Islam')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-2.jpg" alt="Seni Kaligrafi Islam" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1MzFeuhOAE9kEvT7s5MuMi4YSbOR2S5hI/preview','Telesuri Bandar Brunei')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-3.jpg" alt="Telesuri Bandar Brunei" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1v2Q_PRrZw3ABe6Fn6as5rF6V8CEUK13A/preview','Hidupkan Masjid Hidupkan Jiwa')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-4.jpg" alt="Hidupkan Masjid Hidupkan Jiwa" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1qO8PF6blKQ0gKSIo95rnAZg3LK47OPMS/preview','Pusat Da\u02bfwah Islamiah 40th Anniversary')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-5.jpg" alt="Pusat Da'wah Islamiah" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1b1r_f1pAVONsPpdBNV3ArXRcoINQuh54/preview','Tazkirah &amp; Iftar Bersama Masyarakat')">
+            <div class="work-img-wrap">
+              <img src="images/work/vid-thumb-6.jpg" alt="Tazkirah & Iftar" loading="lazy"/>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1lzciWD02pVmQSm6Qvi3UEqecH5LNj7a1/preview','Video 7')">
+            <div class="work-img-wrap">
+              <div class="work-img-ph video-ph"><span class="play-icon">&#9654;</span><br/>Video 7</div>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+          <div class="work-item video-item" onclick="openVideoModal('https://drive.google.com/file/d/1a69lOnKHCfddWJRC_4yCARmKHh1N_mKl/preview','Video 8')">
+            <div class="work-img-wrap">
+              <div class="work-img-ph video-ph"><span class="play-icon">&#9654;</span><br/>Video 8</div>
+              <div class="video-play-btn">&#9654;</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /work-inner -->
+  </section>
+
+  <!-- ── LIGHTBOX MODAL (images) ───────────────────────── -->
+  <div class="lb-backdrop" id="lbBackdrop" onclick="handleLbBackdrop(event)">
+    <button class="lb-close" onclick="closeLightbox()">&#10005;</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" onclick="lbMove(-1)">&#8592;</button>
+    <button class="lb-arrow lb-next" id="lbNext" onclick="lbMove(1)">&#8594;</button>
+    <div class="lb-img-wrap">
+      <img class="lb-img" id="lbImg" src="" alt="" />
+    </div>
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+
+  <!-- ── VIDEO MODAL ───────────────────────────────────── -->
+  <div class="vid-backdrop" id="vidBackdrop" onclick="handleVidBackdrop(event)">
+    <div class="vid-box">
+      <button class="lb-close" onclick="closeVideoModal()">&#10005;</button>
+      <div class="vid-title" id="vidTitle"></div>
+      <div class="vid-player-wrap">
+        <iframe id="vidFrame" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT SECTION ───────────────────────────────── -->
+  <section id="contact">
+    <div class="contact-bg"></div>
+    <div class="contact-overlay"></div>
+    <div class="contact-layout">
+
+      <!-- Info: floated to right, person already in background -->
+      <div class="contact-info">
+        <h2 class="contact-heading reveal">CONTACT ME</h2>
+
+        <a href="mailto:rusydismz@gmail.com" class="contact-item reveal" style="transition-delay:0.1s">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+          </div>
+          <span>rusydismz@gmail.com</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/auza-ie-rusydi-suhaili-927303320/" target="_blank" rel="noopener" class="contact-item reveal" style="transition-delay:0.2s">
+          <div class="contact-icon contact-icon-linkedin">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </div>
+          <span>Auza'ie Rusydi Suhaili</span>
+        </a>
+
+        <a href="tel:+6738249667" class="contact-item reveal" style="transition-delay:0.3s">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.4 2 2 0 0 1 3.04 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
+            </svg>
+          </div>
+          <span>+673 824 9667</span>
+        </a>
+
+        <div class="contact-item reveal" style="transition-delay:0.4s; cursor:default;">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span>Based in Lumut, Belait, Brunei Darussalam</span>
+        </div>
+      </div>
+
+    </div><!-- /contact-layout -->
+
+    <!-- Footer strip -->
+    <div class="contact-footer">
+      <p>© 2026 Auza'ie Rusydi Suhaili &nbsp;·&nbsp; All Rights Reserved</p>
+    </div>
+  </section>
+
+
+  <!-- ── SCRIPTS ─────────────────────────────────────── -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      updateActiveLink();
+    });
+
+    // Active nav link highlight on scroll
+    function updateActiveLink() {
+      const sections = ['home', 'about', 'experience', 'work', 'contact'];
+      const scrollY = window.scrollY + 80;
+      let current = 'home';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // ── Scroll reveal (Intersection Observer) ──────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Experience Data ─────────────────────────────────
+    const expData = [
+      // 0 — Secretary 1
+      { role: 'Secretary 1 of Residential College Unit', dates: ['2022/2023'],
+        photos: [
+          'images/exp/unissa-sec1-1.jpg',
+          'images/exp/unissa-sec1-2.jpg',
+          'images/exp/unissa-sec1-3.jpg',
+          'images/exp/unissa-sec1-4.jpg'
+        ],
+        desc: 'Managed secretarial duties for the Residential College Unit — handling correspondence, coordinating meetings, maintaining records, and supporting the planning and execution of college-wide events.',
+        highlights: [
+          'Interlocal Bonding: Beach Edition',
+          'Interlocal Bonding 3.0: Bintudoh Here We Go!',
+          'Hostelites Walk'
+        ]},
+      // 1 — Head of Spiritual & Religious Unit
+      { role: 'Head of Spiritual & Religious Unit (IDEMS)', dates: ['2022/2023'],
+        photos: [
+          'images/exp/unissa-head-1.jpg',
+          'images/exp/unissa-head-2.jpg',
+          'images/exp/unissa-head-3.jpg',
+          'images/exp/unissa-head-4.jpg'
+        ],
+        desc: 'Led the Spiritual and Religious Unit within IDEMS at the faculty level — planning and overseeing Islamic programmes that fostered spiritual growth, religious awareness, and unity among faculty students.',
+        highlights: [
+          'Ihya Ramadhan',
+          'Majlis Minggu Hubburasul',
+          'Khatam Al-Quran FPPI'
+        ]},
+      // 2 — Treasurer (IDEMS)
+      { role: 'Treasurer (IDEMS)', dates: ['2023/2024'],
+        photos: [
+          'images/exp/unissa-treasurer-1.jpg',
+          'images/exp/unissa-treasurer-2.jpg',
+          'images/exp/unissa-treasurer-3.jpg'
+        ],
+        desc: 'Oversaw all financial matters for IDEMS — managing budgets, tracking expenditure, processing reimbursements, and ensuring transparent financial reporting. Also actively contributed to the planning and management of faculty-level programmes and events.',
+        highlights: [
+          'K2P2I 5.0',
+          'Mahabbah Rasulillah',
+          'Program Negaraku Kebanggaanku'
+        ]},
+      // 3 — Exco
+      { role: 'Exco of Residential College Unit', dates: ['2023/2024'],
+        photos: [
+          'images/exp/unissa-exco-1.jpg',
+          'images/exp/unissa-exco-2.jpg',
+          'images/exp/unissa-exco-3.jpg',
+          'images/exp/unissa-exco-4.jpg'
+        ],
+        desc: 'Served on the Executive Committee of the Residential College Unit, contributing to the planning, coordination, and delivery of a wide range of student welfare and recreational activities.',
+        highlights: [
+          'Aerodance',
+          'Ittihad Day: Mini Adventure',
+          'Sinaut Cozy Night',
+          'BIMA Residential College Exchange Programme (UNISSA × UNISZA)',
+          'Over The Net',
+          'Riuh Ria Berbuka Sinaut',
+          'Sinar Ramadhan'
+        ]},
+      // 4 — Conference Committee
+      { role: 'Conference Committee', dates: ['June 2023'],
+        photos: ['images/exp/unissa-conference.jpg'],
+        desc: 'Served on the organising committee for a major international academic conference — assisting with delegate management, venue logistics, and ensuring smooth proceedings throughout the event.',
+        highlights: [
+          '13th Asian Islamic Universities Association (AIUA) Conference'
+        ]},
+      // 5 — Parallel Session Supervisor
+      { role: 'Parallel Session Supervisor', dates: ['May 2024'],
+        photos: ['images/exp/unissa-parallel.jpg'],
+        desc: 'Supervised parallel sessions during an international Islamic conference, ensuring timekeeping, assisting presenters, and guiding newcomers through the event format.',
+        highlights: [
+          'Konferensi Antarabangsa Islam Borneo Ke-15 (KAIB XV)',
+          'Supervising & assisting newcomer presenters'
+        ]},
+      // 6 — Liaison Officer (already has highlights)
+      { role: 'Liaison Officer', dates: ['August 2024', 'June 2025'],
+        photos: [
+          'images/exp/unissa-liaison-1.jpg',
+          'images/exp/unissa-liaison-2.jpg',
+          'images/exp/unissa-liaison-3.jpg',
+          'images/exp/unissa-liaison-4.jpg'
+        ],
+        desc: 'Served as Liaison Officer for official university engagements — coordinating between delegations, managing protocol, and ensuring smooth proceedings at institutional level events.',
+        highlights: [
+          'Taking care of Datin Samsinar, Vice Chancellor of UniRazak & Husband (2024)',
+          'Taking care of YM Mufti Pahang Prof Datuk Dr Asmadi bin Mohamed Naim (2025)'
+        ]},
+      // 7 — Assistant Secretary
+      { role: 'Assistant Secretary', dates: ['May 2025'],
+        photos: ['images/exp/unissa-asst-sec.jpg'],
+        desc: 'Supported the secretarial team in managing documentation, correspondence, and coordination for a collaborative programme between FPPI and JBS KB.',
+        highlights: [
+          'Kem Mandiri FPPI × JBS KB'
+        ]},
+      // 8 — Event Coordinator / Sales Admin
+      { role: 'Event Coordinator / Sales Admin', dates: ['July – Nov 2025'],
+        photos: [
+          'images/exp/rosnah-event-1.jpg',
+          'images/exp/rosnah-event-2.jpg',
+          'images/exp/rosnah-event-3.jpg'
+        ],
+        desc: 'Coordinated large-scale events and managed sales administration for Rosnah Yusof & Sons Entertainment / Sdn Bhd — liaising with clients, overseeing logistics, and handling administrative operations across multiple high-profile events.',
+        highlights: [
+          'Panaga Festival 2025',
+          "Pusat Da'wah Islamiah 40th Anniversary",
+          'UBD Ruby Run 2025',
+          'UN Tourism Regional Workshop on Measuring the Sustainability of Tourism in Asia and the Pacific 2025'
+        ]},
+      // 9 — Intern
+      { role: 'Intern', dates: ['May – July 2024'],
+        photos: [
+          'images/exp/jabatan-intern-1.jpg',
+          'images/exp/jabatan-intern-2.jpg'
+        ],
+        desc: 'Completed an internship with Jabatan Belia Dan Sukan Cawangan Daerah Belait, gaining practical experience in youth programme coordination, administrative processes, and community event management.',
+        highlights: [
+          'Basic Housekeeping & Services Skills'
+        ]},
+      // 10 — Assistant Committee Members (Aug 2024)
+      { role: 'Assistant Committee Members', dates: ['Aug 2024'],
+        photos: ['images/exp/jabatan-asst-aug.jpg'],
+        desc: 'Assisted the organising committee for a departmental youth event, supporting on-ground coordination, logistics, and participant management.',
+        highlights: [
+          'Kem Belia dan Sukan'
+        ]},
+      // 11 — Joint Secretary
+      { role: 'Joint Secretary', dates: ['December 2024'],
+        photos: ['images/exp/jabatan-joint-sec.jpg'],
+        desc: 'Served as Joint Secretary for a youth development camp — handling documentation, managing agendas, and acting as the key communication bridge between FPPI and JBS KB.',
+        highlights: [
+          'Kem Belia Jati Diri',
+          'Managed all paperwork and official documentation',
+          'Liaison between FPPI & JBS KB'
+        ]},
+      // 12 — Assistant Committee Members (2025)
+      { role: 'Assistant Committee Members', dates: ['Sept 2025', 'Dec 2025'],
+        photos: ['images/exp/jabatan-asst-dec.jpg'],
+        desc: 'Contributed as an assistant committee member across two youth development events, supporting logistics, coordination, and on-site management.',
+        highlights: [
+          'Kem Mandiri Dinamik FPPI × JBS KB'
+        ]}
+    ];
+
+    // ── Modal & Carousel Logic ──────────────────────────
+    let currentSlide = 0;
+    let totalSlides  = 0;
+
+    function openModal(index) {
+      const data  = expData[index];
+      const modal = document.getElementById('expModal');
+      const track = document.getElementById('carouselTrack');
+      const dots  = document.getElementById('carouselDots');
+      const body  = document.getElementById('modalBody');
+
+      // Build carousel slides
+      track.innerHTML = '';
+      data.photos.forEach(src => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = data.role;
+        img.onerror = function() {
+          // If image missing, show placeholder
+          slide.innerHTML = `<div class="carousel-slide-placeholder">📷 Add photo:<br/><small>${src}</small></div>`;
+        };
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+
+      // Dots
+      dots.innerHTML = '';
+      data.photos.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot-indicator' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', `Slide ${i+1}`);
+        d.onclick = () => goToSlide(i);
+        dots.appendChild(d);
+      });
+
+      // Dots row: hide if only 1 photo
+      dots.style.display = data.photos.length > 1 ? 'flex' : 'none';
+
+      // Body content
+      let bodyHTML = '';
+      if (data.desc) {
+        bodyHTML += `<p class="modal-desc">${data.desc}</p>`;
+      }
+      if (data.highlights && data.highlights.length) {
+        bodyHTML += `<p class="modal-highlights-title">Highlights</p>
+          <ul class="modal-highlights">${data.highlights.map(h => `<li>${h}</li>`).join('')}</ul>`;
+      }
+      body.innerHTML = bodyHTML || `<p class="modal-desc" style="color:#aaa">Details coming soon.</p>`;
+
+      // Footer
+      document.getElementById('modalFooterRole').textContent = data.role.toUpperCase();
+      const datesList = document.getElementById('modalFooterDates');
+      if (data.dates && data.dates.length > 1) {
+        datesList.innerHTML = data.dates.map(d => `<li>${d}</li>`).join('');
+        datesList.style.display = '';
+      } else {
+        datesList.style.display = 'none';
+        document.getElementById('modalFooterRole').textContent += (data.dates.length ? '  ·  ' + data.dates[0] : '');
+      }
+
+      totalSlides  = data.photos.length;
+      currentSlide = 0;
+      updateCarousel();
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('expModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target === document.getElementById('expModal')) closeModal();
+    }
+
+    function carouselMove(dir) {
+      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(i) {
+      currentSlide = i;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.getElementById('carouselCounter').textContent =
+        totalSlides > 1 ? `${currentSlide + 1}/${totalSlides}` : '';
+      document.getElementById('carouselPrev').classList.toggle('hidden', totalSlides <= 1);
+      document.getElementById('carouselNext').classList.toggle('hidden', totalSlides <= 1);
+      document.querySelectorAll('.dot-indicator').forEach((d, i) =>
+        d.classList.toggle('active', i === currentSlide));
+    }
+
+    // ── Work: Tab Switching ─────────────────────────────
+    function switchTab(tab) {
+      document.querySelectorAll('.work-tab').forEach((btn, i) => {
+        const tabs = ['graphic','photo','video'];
+        btn.classList.toggle('active', tabs[i] === tab);
+      });
+      document.querySelectorAll('.work-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('panel-' + tab).classList.remove('hidden');
+      // Re-trigger reveal for newly shown panel
+      document.querySelectorAll('#panel-' + tab + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => revealObserver.observe(el), 50);
+      });
+    }
+
+    // ── Lightbox Data ───────────────────────────────────
+    const lbData = {
+      graphic: Array.from({length: 16}, (_,i) => `images/work/gd-${String(i+1).padStart(2,'0')}.jpg`),
+      photo:   Array.from({length: 24}, (_,i) => `images/work/ph-${String(i+1).padStart(2,'0')}.jpg`)
+    };
+
+    let lbCategory = 'graphic';
+    let lbIndex    = 0;
+
+    function openLightbox(category, index) {
+      lbCategory = category;
+      lbIndex    = index;
+      updateLightbox();
+      document.getElementById('lbBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lbBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleLbBackdrop(e) {
+      if (e.target === document.getElementById('lbBackdrop')) closeLightbox();
+    }
+
+    function lbMove(dir) {
+      const total = lbData[lbCategory].length;
+      lbIndex = (lbIndex + dir + total) % total;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const imgs  = lbData[lbCategory];
+      const total = imgs.length;
+      const img   = document.getElementById('lbImg');
+      img.style.opacity = '0';
+      img.src = imgs[lbIndex];
+      img.onload = () => { img.style.opacity = '1'; };
+      img.onerror = () => { img.style.opacity = '0.3'; };
+      document.getElementById('lbCounter').textContent = `${lbIndex + 1} / ${total}`;
+      document.getElementById('lbPrev').classList.toggle('hidden', total <= 1);
+      document.getElementById('lbNext').classList.toggle('hidden', total <= 1);
+    }
+
+    // ── Video Modal ─────────────────────────────────────
+    function openVideoModal(url, title) {
+      const backdrop = document.getElementById('vidBackdrop');
+      const frame    = document.getElementById('vidFrame');
+      const wrap     = frame.parentElement;
+
+      document.getElementById('vidTitle').textContent = title;
+
+      const existing = wrap.querySelector('.vid-no-url');
+      if (existing) existing.remove();
+
+      if (url && url.trim() !== '') {
+        frame.src = url;  // Google Drive /preview or YouTube embed — use as-is
+        frame.style.display = '';
+      } else {
+        frame.src = '';
+        frame.style.display = 'none';
+        const msg = document.createElement('div');
+        msg.className = 'vid-no-url';
+        msg.innerHTML = '<span style="font-size:2rem">🎬</span><br/>Video coming soon.';
+        wrap.appendChild(msg);
+      }
+
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      document.getElementById('vidBackdrop').classList.remove('open');
+      document.getElementById('vidFrame').src = ''; // stop video
+      document.body.style.overflow = '';
+    }
+
+    function handleVidBackdrop(e) {
+      if (e.target === document.getElementById('vidBackdrop')) closeVideoModal();
+    }
+
+    // Keyboard for lightbox
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('lbBackdrop').classList.contains('open')) {
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   lbMove(-1);
+        if (e.key === 'ArrowRight')  lbMove(1);
+      }
+      if (document.getElementById('vidBackdrop').classList.contains('open')) {
+        if (e.key === 'Escape') closeVideoModal();
+      }
+    });
+
+    // Touch swipe for lightbox
+    let lbTouchX = 0;
+    document.getElementById('lbBackdrop').addEventListener('touchstart', e => {
+      lbTouchX = e.touches[0].clientX;
+    }, { passive: true });
+    document.getElementById('lbBackdrop').addEventListener('touchend', e => {
+      const diff = lbTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) lbMove(diff > 0 ? 1 : -1);
+    });
+
+    // Touch swipe support for carousel
+    let touchStartX = 0;
+    document.getElementById('expModal').addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    document.getElementById('expModal').addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) carouselMove(diff > 0 ? 1 : -1);
+    });
+  </script>
+</body>
+</html>
